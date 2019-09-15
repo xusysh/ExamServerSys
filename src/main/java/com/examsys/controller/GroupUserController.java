@@ -49,4 +49,12 @@ public class GroupUserController {
         return responseEntity;
     }
 
+
+    @GetMapping(value = "/usergroup/all")
+    @ResponseBody
+    public ResponseEntity getUserGroup() {
+        ResponseEntity responseEntity = iGroupUserService.getUserGroupInfo();
+        return responseEntity;
+    }
+
 }

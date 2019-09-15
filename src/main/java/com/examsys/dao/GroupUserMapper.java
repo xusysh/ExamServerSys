@@ -2,6 +2,7 @@ package com.examsys.dao;
 
 import com.examsys.model.GroupUser;
 import com.examsys.model.entity.GroupUserInfo;
+import com.examsys.model.entity.UserGroupInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -40,5 +41,7 @@ public interface GroupUserMapper {
     List<GroupUser> selectByGroupId(Integer group_id);
 
     int deleteByGroupId(Integer group_id);
+
+    List<UserGroupInfo> selectUserGroupInfo();
 
 }

@@ -4,6 +4,7 @@ import com.examsys.dao.GroupUserMapper;
 import com.examsys.model.GroupUser;
 import com.examsys.model.entity.GroupUserInfo;
 import com.examsys.model.entity.ResponseEntity;
+import com.examsys.model.entity.UserGroupInfo;
 import com.examsys.service.IGroupUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -117,6 +118,27 @@ public class GroupUserServiceImpl implements IGroupUserService {
         ResponseEntity responseEntity=new ResponseEntity();
         responseEntity.setStatus(200);
         responseEntity.setMsg("更新成功");
+        return responseEntity;
+    }
+
+
+
+    /**
+     * 获取组+成员信息
+     * @return
+     */
+    public ResponseEntity getUserGroupInfo(){
+        List<UserGroupInfo> userGroupInfos=groupUserMapper.selectUserGroupInfo();
+        ResponseEntity responseEntity=new ResponseEntity();
+        if(userGroupInfos==null || userGroupInfos.size()==0){
+            responseEntity.setStatus(-1);
+            responseEntity.setMsg("组不存在");
+        }else {
+            responseEntity.setStatus(200);
+            responseEntity.setMsg("查询成功");
+            responseEntity.setData(userGroupInfos);
+        }
+
         return responseEntity;
     }
 

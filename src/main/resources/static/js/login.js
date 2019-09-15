@@ -20,12 +20,12 @@ $(function(){
     };
 
     $.ajax({
-        url: "/upi/user/multi",
-        type: "delete",
+        url: "/upi/usergroup/all",
+        type: "get",
         traditional: true,
         contentType: "application/json; charset=UTF-8",
         dataType: "json",
-        data:JSON.stringify(test),
+        // data:JSON.stringify(test),
         success: function (data) {
            console.log(data);
         },

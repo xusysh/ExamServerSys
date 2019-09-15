@@ -10,10 +10,7 @@
     select group_id, user_id
     from group_user
   </select>
-
-
-
-
+    
     <!--组+用户信息-->
     <resultMap id="groupUserInfo" type="com.examsys.model.entity.GroupUserInfo">
         <id column="group_id" property="group_id" jdbcType="INTEGER" />
@@ -72,5 +69,27 @@
         select group_id, user_id
         from group_user
         WHERE group_id=#{group_id}
+    </select>
+
+
+    <!--组+用户信息-->
+    <resultMap id="userGroupInfo" type="com.examsys.model.entity.UserGroupInfo">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="userName" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="userType" property="userType" jdbcType="VARCHAR" />
+        <collection property="group_list" ofType="Map">
+            <id column="gid" property="id"></id>
+            <result column="groupName" property="groupName"></result>
+        </collection>
+    </resultMap>
+
+    <!--获取组+用户所有信息-->
+    <select id="selectUserGroupInfo" resultMap="userGroupInfo">
+        SELECT u.id id,u.user_name userName,u.password password,u.user_type userType,
+        g.id gid,g.group_name groupName
+        FROM userinfo u
+        LEFT JOIN  group_user gu on u.id=gu.user_id
+        LEFT JOIN groupinfo g on gu.group_id=g.id
     </select>
 </mapper>

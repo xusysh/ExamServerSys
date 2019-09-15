@@ -21,4 +21,6 @@ public interface IGroupUserService {
     ResponseEntity getGroupUserByGid(int groupId);
 
     ResponseEntity updateUserGroupRelation(Map<String,Object> map);
+
+    ResponseEntity getUserGroupInfo();
 }
