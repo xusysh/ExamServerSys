@@ -91,5 +91,6 @@
         FROM userinfo u
         LEFT JOIN  group_user gu on u.id=gu.user_id
         LEFT JOIN groupinfo g on gu.group_id=g.id
+        where u.user_type="student"
     </select>
 </mapper>
