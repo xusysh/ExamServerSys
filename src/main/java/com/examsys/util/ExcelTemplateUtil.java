@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Created by twinkleStar on 2019/9/8.
  */
 @Component
-public class ExcelUtil {
+public class ExcelTemplateUtil {
 
     public HSSFWorkbook addUsersTemplate(){
 

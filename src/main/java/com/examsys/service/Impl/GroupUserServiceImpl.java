@@ -121,8 +121,6 @@ public class GroupUserServiceImpl implements IGroupUserService {
         return responseEntity;
     }
 
-
-
     /**
      * 获取组+成员信息
      * @return

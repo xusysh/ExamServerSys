@@ -2,7 +2,7 @@ package com.examsys.controller;
 
 import com.examsys.model.entity.ResponseEntity;
 import com.examsys.service.IUserinfoService;
-import com.examsys.util.ExcelUtil;
+import com.examsys.util.ExcelTemplateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +26,7 @@ public class UserinfoController {
     IUserinfoService iUserinfoService;
 
     @Autowired
-    ExcelUtil excelUtil;
+    ExcelTemplateUtil excelUtil;
 
     /**
      * 用户登陆
