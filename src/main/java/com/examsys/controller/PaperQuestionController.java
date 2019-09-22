@@ -6,12 +6,18 @@ import com.examsys.model.entity.ResponseEntity;
 import com.examsys.service.Impl.PaperQuestionServiceImpl;
 import com.examsys.service.Impl.QuestioninfoServiceImpl;
 import com.examsys.util.ExcelAnalysisUtil;
+import com.examsys.util.ExcelTemplateUtil;
+import com.examsys.util.OtherUtil;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +37,11 @@ public class PaperQuestionController {
     PaperQuestionServiceImpl paperQuestionService;
     @Autowired
     QuestioninfoServiceImpl questioninfoService;
+
+    @Autowired
+    ExcelTemplateUtil excelUtil;
+    @Autowired
+    OtherUtil otherUtil;
 
     /**
      * 通过上传模板excel的方式批量添加用户
@@ -63,4 +74,28 @@ public class PaperQuestionController {
         return responseEntity;
 
     }
+
+
+
+    /**
+     * 下载批量导入用户的excel模板
+     * @param response
+     * @throws Exception
+     */
+    @PostMapping("/template")
+    public void userTemplate(HttpServletResponse response) throws Exception {
+        String fileName = "添加试卷模板.xls";
+        HSSFWorkbook wb=excelUtil.addPaperTemplate(); //调用excelUtil生成excel
+        try {
+            otherUtil.setResponseHeader(response, fileName);
+            OutputStream os = response.getOutputStream();
+            wb.write(os);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

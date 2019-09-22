@@ -3,6 +3,7 @@ package com.examsys.controller;
 import com.examsys.model.entity.ResponseEntity;
 import com.examsys.service.IUserinfoService;
 import com.examsys.util.ExcelTemplateUtil;
+import com.examsys.util.OtherUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,8 @@ public class UserinfoController {
 
     @Autowired
     ExcelTemplateUtil excelUtil;
+    @Autowired
+    OtherUtil otherUtil;
 
     /**
      * 用户登陆
@@ -64,7 +67,7 @@ public class UserinfoController {
         String fileName = "添加用户模板.xls";
         HSSFWorkbook wb=excelUtil.addUsersTemplate(); //调用excelUtil生成excel
         try {
-            this.setResponseHeader(response, fileName);
+            otherUtil.setResponseHeader(response, fileName);
             OutputStream os = response.getOutputStream();
             wb.write(os);
             os.flush();
@@ -74,27 +77,27 @@ public class UserinfoController {
         }
     }
 
-    /**
-     * 发送响应流方法
-     * @param response
-     * @param fileName
-     */
-    public void setResponseHeader(HttpServletResponse response, String fileName) {
-        try {
-            try {
-                fileName = new String(fileName.getBytes(),"ISO8859-1");
-            } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            response.setContentType("application/octet-stream;charset=ISO8859-1");
-            response.setHeader("Content-Disposition", "attachment;filename="+ fileName);
-            response.addHeader("Pargam", "no-cache");
-            response.addHeader("Cache-Control", "no-cache");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+//    /**
+//     * 发送响应流方法
+//     * @param response
+//     * @param fileName
+//     */
+//    public void setResponseHeader(HttpServletResponse response, String fileName) {
+//        try {
+//            try {
+//                fileName = new String(fileName.getBytes(),"ISO8859-1");
+//            } catch (UnsupportedEncodingException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//            response.setContentType("application/octet-stream;charset=ISO8859-1");
+//            response.setHeader("Content-Disposition", "attachment;filename="+ fileName);
+//            response.addHeader("Pargam", "no-cache");
+//            response.addHeader("Cache-Control", "no-cache");
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
 
     @DeleteMapping("/multi")
     public ResponseEntity deleteUsers(@RequestBody Map<String,Object> map) {
