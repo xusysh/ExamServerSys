@@ -78,11 +78,11 @@ public class PaperQuestionController {
 
 
     /**
-     * 下载批量导入用户的excel模板
+     * 下载批量导入的excel模板
      * @param response
      * @throws Exception
      */
-    @PostMapping("/template")
+    @GetMapping("/template")
     public void userTemplate(HttpServletResponse response) throws Exception {
         String fileName = "添加试卷模板.xls";
         HSSFWorkbook wb=excelUtil.addPaperTemplate(); //调用excelUtil生成excel

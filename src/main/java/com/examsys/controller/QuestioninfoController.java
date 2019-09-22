@@ -60,7 +60,7 @@ public class QuestioninfoController {
     }
 
 
-    @PostMapping("/template")
+    @GetMapping("/template")
     public void userTemplate(HttpServletResponse response) throws Exception {
         String fileName = "添加题库模板.xls";
         HSSFWorkbook wb=excelUtil.addQuestionsTemplate(); //调用excelUtil生成excel
